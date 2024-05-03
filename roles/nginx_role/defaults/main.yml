@@ -1,0 +1,4 @@
+---
+# defaults file for nginx_role
+
+nginx_port: 80
