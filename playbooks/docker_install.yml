@@ -1,0 +1,16 @@
+# Производит апдейт и апгрейд и устанавливает докер
+- hosts: all
+  tasks:
+    - name: Проверка доступности хостов по ping
+      ping:
+
+    - name: Обновление Ubuntu и установка обновлений
+      become: yes
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+- hosts: all
+  become: yes
+  roles:
+    - docker_install

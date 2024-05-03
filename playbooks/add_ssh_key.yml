@@ -1,0 +1,8 @@
+# Забрасывает SSH-ключи для подключения
+- name: Add SSH key to remote hosts
+  hosts: ubuntu_hosts
+  tasks:
+    - name: Add SSH key to authorized_keys
+      authorized_key:
+        user: "{{ ansible_user }}"
+        key: "{{ lookup('file', '/home/user/.ssh/id_rsa.pub') }}" # указать свой путь к  публичному ключу

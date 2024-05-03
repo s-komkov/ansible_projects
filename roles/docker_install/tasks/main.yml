@@ -1,0 +1,15 @@
+- name: Установка Docker
+  become: yes
+  become_user: root
+  shell: curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+
+- name: Добавление пользователя в группу docker
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+
+- name: Перезапуск сервиса Docker
+  systemd:
+    name: docker
+    state: restarted

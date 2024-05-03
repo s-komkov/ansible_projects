@@ -1,0 +1,12 @@
+# Добавляет в /etc/sudoers запись для выполнения sudo без ввода пароля
+
+- hosts: all
+  tasks:
+    - name: Add sudo configuration for user to run commands without password
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: "^{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+        line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+        validate: "/usr/sbin/visudo -csf %s"
+      become: true
